@@ -20,6 +20,9 @@ The Document interface represents any web page loaded in the browser and serves 
 
 - returns the first element within the document that matches the selectors given
 - exmaple: `var el = document.querySelector(".myclass");`
+- how to query
+  - clase: `.classsName`
+  - id: `#id`
 
 ### `.querySelectorAll(query)`
 
@@ -28,6 +31,25 @@ The Document interface represents any web page loaded in the browser and serves 
 - The Document method querySelectorAll() returns a static (not live) NodeList representing a list of the document's elements that match the specified group of selectors
 - example: `elementList = document.querySelectorAll('.classname');`
 
+### `.documentElement`
+
+grab the root element of the html file.
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement)
+
+exmaple: `document.documentElement`
+
+#### `.style`
+
+grabs the style element from the root html element in the document.
+
+Example: `document.documentElement.style`
+
+#### `.setProperty`
+
+used to set the value of a css property.
+
+Example: `document.documentElement.style(elementName, newValue)`
 ## DOMTokenList
 
 ### `.add(DOMString)`
@@ -66,6 +88,14 @@ The style read-only property returns the inline style of an element in the form 
 **Setting styles** - While this property is considered read-only, it is possible to set an inline style by assigning a string directly to the style property. In this case the string is forwarded to CSSStyleDeclaration.cssText. Using style in this manner will completely overwrite all inline styles on the element.
 
 Therefore, to add specific styles to an element without altering other style values, it is generally preferable to set individual properties on the CSSStyleDeclaration object. For example, element.style.backgroundColor = "red".
+
+### `.dataset`
+
+puts all user defined html props (those starting with `dataset-`) into an object that is easily accessible.
+
+example: `element.datatset.attributeName`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset)
 
 ## `HTMLMediaElement`
 
@@ -201,6 +231,8 @@ method returns the hour for the specified date, according to local time.
   - `'keyup'`
   - `'keydown'`
   - [`'transitionend'` - transition event](#transitionevent)
+  - `change`
+  - `mousemove`
 - example
 
 ```js
