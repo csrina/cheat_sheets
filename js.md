@@ -9,6 +9,15 @@ A property of an execution context (global, function or eval) that, in non–str
 
 [`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
 
+## Random
+
+`const [last, first] = lastOne.split(', ')`
+
+- `lastOne` is a name in format `last, first`
+- its split on the `', '`
+- then stored into 2 variables `last` and `first`
+- not sure what this would be called
+
 ## `Document`
 
 [dmo](https://developer.mozilla.org/en-US/docs/Web/API/Document)
@@ -39,7 +48,7 @@ grab the root element of the html file.
 
 exmaple: `document.documentElement`
 
-#### `.style`
+#### `.style` (documentElement)
 
 grabs the style element from the root html element in the document.
 
@@ -50,6 +59,7 @@ Example: `document.documentElement.style`
 used to set the value of a css property.
 
 Example: `document.documentElement.style(elementName, newValue)`
+
 ## DOMTokenList
 
 ### `.add(DOMString)`
@@ -77,7 +87,7 @@ Example: `document.documentElement.style(elementName, newValue)`
 
 ## HTMLElement
 
-### `.style`
+### `.style` (HTMLELement)
 
 [dmo](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style)
 
@@ -267,3 +277,134 @@ method returns the hour for the specified date, according to local time.
   - `thisArg`: Optional - Value to use as `this` when executing callback
 - returns: `undefined`
 - exmple: `keys.forEach(key => console.log(key))`
+
+## `Array`
+
+### `.from()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
+
+- Static method creates a new, shallow-copied Array instance from an array-like or iterable object.
+- used to turn a NodeList into an array to use `Array.prototype` methods on it
+
+**Syntax:**
+
+```js
+Array.from(arrayLike, (element, index) => { ... } )
+Array.from(arrayLike, mapFn, thisArg)
+Array.from(arrayLike, function mapFn(element, index) { ... }, thisArg)
+```
+
+### `.prototype` (array)
+
+#### `.filter()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+
+**syntax**:
+
+```js
+filter((element, [index], [array]) => { ... } )
+filter(callbackFn, thisArg)
+filter(function callbackFn(element, index, array) { ... }, thisArg)
+```
+
+**Parameters:**
+
+- `callbackFn`: Function is a predicate, to test each element of the array. Return a value that coerces to true to keep the element, or to false otherwise. It accepts three arguments:
+  - `element`: The current element being processed in the array.
+  - `[index]`: The index of the current element being processed in the array.
+  - `[array]`: The array `filter` was called upon.
+- `[thisArg]`: Value to use as `this` when executing `callbackFn`.
+
+**Return value** :A new array with the elements that pass the test. If no elements pass the test, an empty array will be returned.
+
+#### `.map()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+
+The `map()` method creates a new array populated with the results of calling a provided function on every element in the calling array.
+
+**Syntax:**
+
+```js
+map((element, [index], [array]) => { ... })
+map(callbackFn, thisArg)
+map(function callbackFn(element, index, array) { ... }, thisArg)
+```
+
+#### `.reduce()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+
+- The reducer walks through the array element-by-element, at each step adding the current array value to the result from the previous step (this result is the running sum of all the previous steps) — until there are no more elements to add.
+
+**Syntax:**
+
+```js
+reduce((previousValue, currentValue) => { ... } )
+reduce((previousValue, currentValue, currentIndex, array) => { ... }, initialValue)
+
+reduce(function callbackFn(previousValue, currentValue) { ... })
+reduce(function callbackFn(previousValue, currentValue, currentIndex, array) { ... }, initialValue)
+```
+
+**Example**: `[0, 1, 2, 3, 4].reduce((previousValue, currentValue, currentIndex, array) => previousValue + currentValue)`
+
+#### `.sort()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+
+- method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+- If `a` and `b` are two elements being compared, then:
+  - If `compareFunction(a, b)` returns a value *> than 0*, sort `b` before `a`.
+  - If `compareFunction(a, b)` returns a value *< than 0*, sort `a` before `b`.
+  - If `compareFunction(a, b)` returns *0*, `a` and b are considered equal
+
+**Syntax**:
+
+```js
+// Functionless
+sort() //the array elements are converted to strings, then sorted according to each character's Unicode code point value.
+
+// Arrow function
+sort((firstEl, secondEl) => { ... } )
+
+// Inline compare function
+sort(function compareFn(firstEl, secondEl) { ... })
+```
+
+**Example** : `[4, 2, 5, 1, 3].sort((a, b) => a - b);`
+
+## `console.`
+
+### `.table()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
+
+- method displays tabular data as a table.
+- This function takes one mandatory argument data, which must be an `array` or an `object`, and one additional optional parameter `columns` is the name of columns to print for objects
+
+**syntax**:
+
+```js
+console.table(data);
+console.table(data, columns);
+```
+
+## `String`
+
+### `.prototype` (string)
+
+#### `.includes()`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
+
+- method performs a case-sensitive search to determine whether one string may be found within another string, returning `true` or `false` as appropriate.
+
+**Syntax**:
+
+```js
+includes(searchString)
+includes(searchString, position) //position where to start the search
+```
