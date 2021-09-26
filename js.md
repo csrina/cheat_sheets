@@ -67,6 +67,22 @@ Example: `document.documentElement.style(elementName, newValue)`
 - The add() method of the DOMTokenList interface adds the given token to the list
 - example: `tokenList.add(token1[, token2[, ...tokenN]]);`
 
+### `.toggle(token)`
+
+[dmo](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle)
+
+- method that removes a given `token` from the list and returns `false`. If `token` doesn't exist it's added and the function returns `true`.
+
+**Syntax**: `tokenList.toggle(token [, force]);`
+
+**Parameters**:
+
+- `token` : A DOMString representing the token you want to toggle.
+- `[force]`: If included, turns the toggle into a one way-only operation. I
+  - `false`, then token will only be removed, but not added
+  - `true`, then token will only be added, but not removed
+
+**Return value**: `true` or `false`, indicating whether token is in the list after the call.
 ## Element
 
 ### `.classlist`
@@ -76,14 +92,17 @@ Example: `document.documentElement.style(elementName, newValue)`
 - The Element.classList is a read-only property that returns a live `DOMTokenList` collection of the class attributes of the element. This can then be used to manipulate the class list.
 - see related methods
   - [.classlist.add('new class name')](#adddomstring)
-- example:
+    - example:
 
-```js
-    let span = document.querySelector("span");
-    let classes = span.classList;
-    classes.add("d");
-    span.textContent = classes;
-```
+    ```js
+        let span = document.querySelector("span");
+        let classes = span.classList;
+        classes.add("d");
+        span.textContent = classes;
+    ```
+
+  - [.classlist.toggle('class-name')](#toggletoken)
+    - exmple: `document.querySelector("span").classList.toggle('class-name')`
 
 ## HTMLElement
 
