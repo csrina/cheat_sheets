@@ -18,6 +18,17 @@ A property of an execution context (global, function or eval) that, in non–str
 - then stored into 2 variables `last` and `first`
 - not sure what this would be called
 
+### `var` vs `const` vs `let` [fcc](https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/)
+
+- `var` declarations are globally scoped or function scoped while `let` and `const` are block scoped.
+- updates and re-declaration:
+  - `var` variables can be updated and re-declared within its scope; 
+  - `let` variables can be updated but not re-declared; 
+  `const` variables can neither be updated nor re-declared.
+- They are all hoisted to the top of their scope. But while `var` variables are initialized with `undefined`, `let` and `const` variables are not initialized.
+- While `var` and `let` can be **declared without being initialized**, `const` **must be initialized** during declaration.
+
+
 ## `Document`
 
 [dmo](https://developer.mozilla.org/en-US/docs/Web/API/Document)
@@ -299,9 +310,7 @@ method returns the hour for the specified date, according to local time.
 
 ## `Array`
 
-### `.from()`
-
-[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
+### `.from()`- method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
 
 - Static method creates a new, shallow-copied Array instance from an array-like or iterable object.
 - used to turn a NodeList into an array to use `Array.prototype` methods on it
@@ -316,9 +325,7 @@ Array.from(arrayLike, function mapFn(element, index) { ... }, thisArg)
 
 ### `.prototype` (array)
 
-#### `.filter()`
-
-[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+#### `.filter()` [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 
 **syntax**:
 
@@ -338,9 +345,7 @@ filter(function callbackFn(element, index, array) { ... }, thisArg)
 
 **Return value** :A new array with the elements that pass the test. If no elements pass the test, an empty array will be returned.
 
-#### `.map()`
-
-[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+#### `.map()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 The `map()` method creates a new array populated with the results of calling a provided function on every element in the calling array.
 
@@ -352,9 +357,7 @@ map(callbackFn, thisArg)
 map(function callbackFn(element, index, array) { ... }, thisArg)
 ```
 
-#### `.reduce()`
-
-[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+#### `.reduce()` [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
 - The reducer walks through the array element-by-element, at each step adding the current array value to the result from the previous step (this result is the running sum of all the previous steps) — until there are no more elements to add.
 
@@ -370,9 +373,7 @@ reduce(function callbackFn(previousValue, currentValue, currentIndex, array) { .
 
 **Example**: `[0, 1, 2, 3, 4].reduce((previousValue, currentValue, currentIndex, array) => previousValue + currentValue)`
 
-#### `.sort()`
-
-[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+#### `.sort()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 
 - method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
 - If `a` and `b` are two elements being compared, then:
@@ -395,6 +396,19 @@ sort(function compareFn(firstEl, secondEl) { ... })
 
 **Example** : `[4, 2, 5, 1, 3].sort((a, b) => a - b);`
 
+#### `.push()` - mehtod [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+
+- **Syntax:**
+  ```js
+    push(element0)
+    push(element0, element1)
+    push(element0, element1, ... , elementN)
+  ```
+- **Paramaters:**
+  - `elementN`: 1 to n elements to add to the end of the array
+- **Returns:**
+  - new length of the array, does not return a new array or a copy of it
+
 ## `console.`
 
 ### `.table()`
@@ -415,9 +429,7 @@ console.table(data, columns);
 
 ### `.prototype` (string)
 
-#### `.includes()`
-
-[dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
+#### `.includes()` [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 - method performs a case-sensitive search to determine whether one string may be found within another string, returning `true` or `false` as appropriate.
 
@@ -427,3 +439,98 @@ console.table(data, columns);
 includes(searchString)
 includes(searchString, position) //position where to start the search
 ```
+
+### `.match()` - method [dmo](!!todo!!)
+
+- sreaches a string based on a regex and retruns found string
+- **Syntax:** `match(regexp)`
+- **Parameters:**
+  - `regexp` regular expression object
+    - if it isnt a `RegExp` object it will be converted
+    - it is left empty `[""]` is returned
+- **Return Value:**
+  - `null` - no matches are found
+  - `Array` - of found matches
+    - if `g` flag is used in the regex
+      - all matching results are returned
+      - capturing groups are not returned
+    - if `g` flag is not used
+      - only first match is returned
+      - the first match's related capturing groups are also returned
+      - it will have additional properties
+        - `groups`
+          - object of named capturing groups
+          - !!todo look up groups and ranges!!
+        - `index`
+          - the index of the search at which the result was found
+          - `input` a copy of the search string
+- consider other methods if `g` flag is not being used
+  - `RegExp.test()` - returns just a boolean
+  - `RegExp.exec()` - just want the first result
+  - `RegExp.exec()` or `String.prototype.matchAll()` - to get capture groups with the global flag is on
+
+## fetch() [dmo](https://developer.mozilla.org/en-US/docs/Web/API/fetch)
+
+- global method starts the process of fetching a resource from the network, returning a promise which is fulfilled once the response is available.
+- **Syntax:** `const fetchResponsePromise = fetch(resource [, init])`
+- **Parameters:**
+  - `resource` - can be either
+    - stirng: the url request to fetch
+    - `Request` object
+  - `[init]` object
+    - contains any custom settingsfor the request
+    - options included
+      - `method` - eg GET, POST
+      - `headers` 
+      - ... a whole bunch of stuff that is needed for making calls
+- **Returns:** `Promise` that resolves to a `Response` object.
+- Since it returns a promise it be followed up by [promise methods](#promisedmo)
+
+## Promise [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+### `.then()` [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+
+- **Syntax:** 
+  ```js
+  p.then(onFulfilled[, onRejected]);
+
+  p.then(value => {
+    // fulfillment
+  }, reason => {
+    // rejection
+  });
+  ```
+- **Parameters:**
+  - `[onFulfilled]` *function*
+    - if the preceding promise is fulfilled it will call this function
+    - variables passed to it:
+      - `value` - what the preceding promise returns on successfully completion
+  - `[onRejected]`  *function*
+    - if the preceding promise is rejected this function will be called
+    - variables passed to it:
+      - `reason` - the rejection reason
+- **Returns:** it depends on the onFulfilled and onRejected functions used:
+  - return a value:
+    - the promise returned by `then` gets resolved with the returned value as its value.
+  - nothing is returned
+    - the promise returned by `then` gets resolved with an `undefined` value.
+  - error thrown
+    - the promise returned by `then` gets rejected with the thrown error as its value.
+  - returns an already fulfilled promise
+    - the promise returned by `then` gets fulfilled with that promise's value as its value.
+  - returns an already rejected promise
+    - the promise returned by `then` gets rejected with that promise's value as its value.
+  - returns another pending promise object
+    - the resolution/rejection of the promise returned by `then` will be subsequent to the resolution/rejection of the promise returned by the handler
+    - the resolved value of the promise returned by `then` will be the same as the resolved value of the promise returned by the handler.
+
+## Response - Interface [dmo](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+
+### `.json()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/Response/json)
+
+- takes a `Response` stream and reads it to completion. It returns a promise which resolves with the result of parsing the body text as `JSON`.
+- **Syntax:** `response.json()`
+- **Parameters:** - nothing
+- **Returns:** - a [promise](#promisedmo) that resolves to a JavaScript object. This object could be anything that can be represented by JSON — an object, an array, a string, a number...
+
+
