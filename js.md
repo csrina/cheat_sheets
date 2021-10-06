@@ -38,7 +38,7 @@ The Document interface represents any web page loaded in the browser and serves 
 
 [dmo](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
 
-- returns the first element within the document that matches the selectors given
+- returns the first element within the document that matches the selectors given, returns an [`Element`](#element)
 - exmaple: `var el = document.querySelector(".myclass");`
 - how to query
   - clase: `.classsName`
@@ -114,6 +114,29 @@ Example: `document.documentElement.style(elementName, newValue)`
 
   - [.classlist.toggle('class-name')](#toggletoken)
     - exmple: `document.querySelector("span").classList.toggle('class-name')`
+
+### `.innerHTML` - property [dmo] (https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML)
+
+The `Element` property `innerHTML` gets or sets the HTML or XML markup contained within the element. 
+
+**Syntax**
+
+```js 
+const content = element.innerHTML; //reading 
+
+element.innerHTML = htmlString; //setting
+```
+
+**Value**
+A `DOMString` containing the HTML serialization of the element's descendants. Setting the value of `innerHTML` removes all of the element's descendants and replaces them with nodes constructed by parsing the HTML given in the string *htmlString*.
+
+**Exceptions**
+
+- `SyntaxError` `DOMException`
+  - Thrown if an attempt was made to set the value of `innerHTML` using a string which is not properly-formed HTML.
+- `NoModificationAllowedError` `DOMException`
+  - Thrown if an attempt was made to insert the HTML into a node whose parent is a `Document`.
+
 
 ## HTMLElement
 
@@ -356,6 +379,17 @@ map((element, [index], [array]) => { ... })
 map(callbackFn, thisArg)
 map(function callbackFn(element, index, array) { ... }, thisArg)
 ```
+**Parameters:**
+
+- `callbackFn` 
+  - Function that is called for every element of the array. Each time `callbackFn` executes, the returned value is added to `newArray`.
+  - arrguments:
+    - `element` - The current element being processed in the array.
+    - `[index]`- The index of the current element being processed in the array.
+    - `array` - The array map was called upon.
+- `[thisArg]` - Value to use as `this` when executing `callbackFn`.
+
+**Return value** A new array with each element being the result of the callback function.
 
 #### `.reduce()` [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
@@ -409,6 +443,21 @@ sort(function compareFn(firstEl, secondEl) { ... })
 - **Returns:**
   - new length of the array, does not return a new array or a copy of it
 
+#### `.join()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
+
+**Syntax**
+
+```js
+join()
+join(separator)
+```
+
+**Parameters**
+
+- `[separator]` - Specifies a string to separate each pair of adjacent elements of the array. The separator is converted to a string if necessary. If omitted, the array elements are separated with a comma (","). If `separator` is an empty string, all elements are joined without any characters in between them.
+
+**Return value** : A string with all array elements joined. If `arr.length` is 0, the empty string is returned. 
+
 ## `console.`
 
 ### `.table()`
@@ -425,13 +474,54 @@ console.table(data);
 console.table(data, columns);
 ```
 
+## `RegExp` - object [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+
+used for matching text with a pattern.
+
+There are two ways to create a RegExp object: 
+- **The literal notation's** parameters are enclosed between slashes and do not use quotation marks.
+- **The constructor function's** parameters are not enclosed between slashes but do use quotation marks.
+
+```js
+let re = /ab+c/i; // literal notation
+let re = new RegExp('ab+c', 'i') // constructor with string pattern as first argument
+let re = new RegExp(/ab+c/, 'i') // constructor with regular expression literal as first argument (Starting with ECMAScript 6)
+```
+
+### constructor [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/RegExp)
+
+creates a regular expression object for matching text with a pattern. 
+
 ## `String`
 
 ### `.prototype` (string)
 
+#### `.replace()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
 #### `.includes()` [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 - method performs a case-sensitive search to determine whether one string may be found within another string, returning `true` or `false` as appropriate.
+
+**Syntax**: `replace(regexp || substr, newSubstr || replacerFunction)`
+
+**Parameters:**
+- `regexp` (pattern)
+  - A `RegExp` object or literal.
+  - The match or matches are replaced with `newSubstr` or the value returned by the specified `replacerFunction`.
+- `substr`
+  - A `String` that is to be replaced by `newSubstr`.
+  - It is treated as a literal string and is not interpreted as a regular expression. 
+  - Only the first occurrence will be replaced.
+- `newSubstr` (replacement)
+  - The `String` that replaces the substring specified by the specified `regexp` or `substr` parameter. 
+  - A number of special replacement patterns are supported; see the "[Specifying a string as a parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_a_parameter)"
+  - If `newSubstr` is an empty string, then the substring given by `substr`, or the matches for `regexp`, are *****removed***** (rather then being replaced).
+- `replacerFunction` (replacement)
+  - A function to be invoked to create the new substring to be used to replace the matches to the given `regexp` or `substr`.
+  The arguments supplied to this function are described in the "[Specifying a function as a parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_a_parameter)"
+
+**Return value** - A new string, with some or all matches of a pattern replaced by a replacement.
+
 
 **Syntax**:
 
@@ -440,7 +530,7 @@ includes(searchString)
 includes(searchString, position) //position where to start the search
 ```
 
-### `.match()` - method [dmo](!!todo!!)
+### `.match()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
 
 - sreaches a string based on a regex and retruns found string
 - **Syntax:** `match(regexp)`
@@ -460,7 +550,7 @@ includes(searchString, position) //position where to start the search
       - it will have additional properties
         - `groups`
           - object of named capturing groups
-          - !!todo look up groups and ranges!!
+          - [!!todo look up groups and ranges!!](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges)
         - `index`
           - the index of the search at which the result was found
           - `input` a copy of the search string
