@@ -9,6 +9,8 @@ A property of an execution context (global, function or eval) that, in non–str
 
 [`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
 
+[truthy and falsey](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+
 ## Random
 
 `const [last, first] = lastOne.split(', ')`
@@ -458,7 +460,168 @@ join(separator)
 
 **Return value** : A string with all array elements joined. If `arr.length` is 0, the empty string is returned. 
 
+#### `.some()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
+
+tests whether at least one element in the array passes the test implemented by the provided function.
+
+- **Syntax**
+
+```js
+// Arrow function
+some((element, [index], [array]) => { ... } )
+// Callback function
+some(callbackFn, [thisArg])
+// Inline callback function
+some(function callbackFn(element, [index], [array]) { ... }, [thisArg])
+```
+
+- **Parameters**
+  - `callbackFn` - A function to test for each element, taking three arguments:
+    - `element` - The current element being processed in the array.
+    - `[index]` - The index of the current element being processed in the array.
+    - `[array]` - The array `some()` was called upon.
+  - `[thisArg]` - A value to use as `this` when executing `callbackFn`.
+- **Return value** true if the callback function returns a truthy value for at least one element in the array. Otherwise, false.
+
+#### `.every()` - methods [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
+
+tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.
+
+- **Syntax:**
+
+```js
+// Arrow function
+every((element, [index], [array]) => { ... } )
+// Callback function
+every(callbackFn, [thisArg])
+// Inline callback function
+every(function callbackFn(element, [index], [array]) { ... }, [thisArg])
+```
+
+- **Parameters:**
+  - `callbackFn` - A function to test for each element, taking three arguments
+    - `element` - The current element being processed in the array.
+    - `[index]` - The index of the current element being processed in the array.
+    - `[array]` - The array `every` was called upon.
+  - `[thisArg]` - A value to use as `this` when executing `callbackFn`.
+- **Return Value:** `true` if the `callbackFn` function returns a *truthy* value for every array element. Otherwise, `false`. 
+
+#### `.find()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
+
+returns the value of the first element in the provided array that satisfies the provided testing function.
+
+- **Syntax:**
+
+```js
+// Arrow function
+find((element, [index], [array]) => { ... } )
+// Callback function
+find(callbackFn, [thisArg])
+// Inline callback function
+find(function callbackFn(element, [index], [array]) { ... }, [thisArg])
+```
+
+- **Parameters:**
+  - `callbackFn` - Function to execute on each value in the array, taking 3 arguments:
+    - `element` - The current element in the array.
+    - `[index]` - The index (position) of the current element in the array.
+    - `[array]` - The array that find was called on.
+- `[thisArg]` - Object to use as this inside callbackFn.
+- **Return Value:**  The *value* of the first element in the array that satisfies the provided testing function. Otherwise, `undefined` is returned.
+
+#### `findIndex()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
+
+returns the index of the first element in the array that satisfies the provided testing function.
+
+- **Syntax:**
+
+```js
+// Arrow function
+findIndex((element, [index], [array]) => { ... } )
+// Callback function
+findIndex(callbackFn, [thisArg])
+// Inline callback function
+findIndex(function callbackFn(element, [index], [array]) { ... }, [thisArg])
+```
+
+- **Parameters:**
+  - `callbackFn` - A function to execute on each value in the array until the function returns `true`, indicating that the satisfying element was found. It takes three arguments:
+    - `element` - The current element in the array.
+    - `[index]` - The index (position) of the current element in the array.
+    - `[array]` - The array that findIndex was called on.
+- `[thisArg]` - Object to use as this inside callbackFn.
+- **Return Value:** The index of the first element in the array that passes the test. Otherwise, -1.
+
+#### `.splice()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+
+Changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+
+- **Syntax:**
+
+```js
+splice(start)
+splice(start, [deleteCount])
+splice(start, [deleteCount], [item1])
+splice(start, [deleteCount], [item1], [item2], [itemN])
+```
+
+- **Parameters:**
+  - `start`
+    - The index at which to start changing the array.
+    - If *greater than the length of the array*, start will be set to the length of the array. In this case, no element will be deleted but the method will *behave as an adding function*, adding as many element as item[n*] provided.
+
+      ```js
+      const months = ['Jan', 'March', 'April', 'June'];
+      console.log(months.length) //4
+      months.splice(10, 0, 'test')
+      console.log(months) //["Jan", "March", "April", "June", "test"]
+      console.log(months.length) //5
+      ```
+
+    - If *negative*, it will begin that many elements from the *end of the array*. (In this case, the origin -1, meaning -n is the index of the nth last element, and is therefore equivalent to the index of array.length - n.) If start is negative infinity, it will begin from index 0.
+  
+      ```js
+      const months = ['Jan', 'March', 'April', 'June'];
+      months.splice(-1, 0, 'test')
+      console.log(months) //["Jan", "March", "April", "test", "June"]
+      ```
+
+  - `[deleteCount]`
+    - An integer indicating the number of elements in the array to remove from `start`.
+    - If deleteCount is *omitted*, or if its *value is equal to or larger than `array.length - start`* (that is, if it is equal to or greater than the number of elements left in the array, starting at start), ***then all the elements from start to the end of the array will be deleted.***
+    - If deleteCount is* 0 or negative*, no elements are removed. In this case, you should specify at least one new element (see below).
+  - `[item1, item2, ... ]`
+    - The elements to add to the array, beginning from start. If you do not specify any elements, `splice()` will only remove elements from the array.
+
+- **Return Value:**
+  - An array containing the deleted elements.
+  - If only one element is removed, an array of one element is returned.
+  - If no elements are removed, an empty array is returned.
+
+#### `.slice()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+
+Returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. *The original array will not be modified.*
+
+- **Syntax:** `slice([start], [end])`
+- **Parameters:**
+  - `[start]`
+    - Zero-based index at which to start extraction.
+    - A negative index can be used, indicating an *offset from the end of the sequence*. slice(-2) extracts the last two elements in the sequence.
+    - If start is undefined, slice starts from the index 0.
+    - If start is greater than the index range of the sequence, an empty array is returned.
+  - `[end]`
+    - Zero-based index before which to end extraction. `slice` extracts up to *but not including end*. For example, slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3).
+    - A negative index can be used, *indicating an offset from the end of the sequence*. slice(2,-1) extracts the third element through the second-to-last element in the sequence.
+    - If `end` is omitted, `slice` extracts through the end of the sequence `(arr.length)`.
+    - If `end` is greater than the length of the sequence, slice extracts through to the end of the sequence `(arr.length)`.
+
+- **Return Value:** A new array containing the extracted elements.
+
 ## `console.`
+
+### `.log()`
+
+`console.log({var})` - prints the variable name and the value it holds
 
 ### `.table()`
 
