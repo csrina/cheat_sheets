@@ -617,15 +617,31 @@ Returns a shallow copy of a portion of an array into a new array object selected
 
 - **Return Value:** A new array containing the extracted elements.
 
-## `console.`
+## `console.` - object [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console)
 
-### `.log()`
+### `.log()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 
-`console.log({var})` - prints the variable name and the value it holds
+**Syntax**
 
-### `.table()`
+```js
+console.log(obj1 [, obj2, ..., objN]);
+console.log(msg [, subst1, ..., substN]);
+```
 
-[dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
+**Parameters**
+- `obj1 ... objN`
+  - A list of JavaScript objects to output. 
+  - The string representations of each of these objects are appended together in the order listed and output. 
+  - Please be warned that if you log objects in the latest versions of Chrome and Firefox what you get logged on the console is a reference to the object, which is not necessarily the 'value' of the object at the moment in time you call console.log(), but it is the value of the object at the moment you open the console.
+- `msg` - A JavaScript string containing zero or more substitution strings.
+- `subst1 ... substN` -JavaScript objects with which to replace substitution strings within msg.
+
+- interpolation: 
+  - `console.log({var})` - prints the variable name and the value it holds
+  - `console.log('this is a %s', var)`
+- logging object: `console.log(JSON.parse(JSON.stringify(obj)))`
+
+### `.table()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
 
 - method displays tabular data as a table.
 - This function takes one mandatory argument data, which must be an `array` or an `object`, and one additional optional parameter `columns` is the name of columns to print for objects
@@ -636,6 +652,45 @@ Returns a shallow copy of a portion of an array into a new array object selected
 console.table(data);
 console.table(data, columns);
 ```
+
+### `.clear()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/clear)
+
+.... it clears the console
+
+### `.info() .warn() .error()`
+
+The stuff printed gets certain ui elements.
+
+## `.dir()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/dir)
+
+displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
+
+**Syntax:** `console.dir(object);`
+
+### `.assert()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
+
+Writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
+
+**Syntax:** `console.assert(assertion, obj1 || msg);`
+
+### `.count()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/count)
+
+Logs the number of times that this particular call to count() has been called.
+Can be used to count how many times a function gets called
+
+**Syntax:** `console.count([label]);`
+
+### `.group()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/group) & `.groupEnd()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd)
+
+`console.group(label)` - starts a new inline group
+`console.groupEnd(label)` - ends the inlinge group
+
+this will print any `console.log/warn/...` in between them grouped together in the console, makes easir to read.
+
+### `.time()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/time) & `.timeEnd()` - method [dmo](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
+
+`console.time(label)` - starts a timer for anything
+`console.timeEnd(label)` - ends the timer and prints out the time
 
 ## `RegExp` - object [dmo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
